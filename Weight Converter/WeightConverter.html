@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .converter {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input,
+        select,
+        button {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output {
+            margin-top: 20px;
+        }
+
+        .output p {
+            margin: 5px 0;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weight Converter</h1>
+        <div class="converter">
+            <input type="number" id="inputWeight" placeholder="Enter weight">
+            <select id="inputUnit">
+                <option value="kg">Kilograms</option>
+                <option value="lbs">Pounds</option>
+                <option value="g">Grams</option>
+            </select>
+            <button onclick="convertWeight()">Convert</button>
+            <div class="output">
+                <p id="outputKg"></p>
+                <p id="outputLbs"></p>
+                <p id="outputG"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function convertWeight() {
+            let inputWeight = document.getElementById('inputWeight').value;
+            let inputUnit = document.getElementById('inputUnit').value;
+
+            if (inputWeight === '') {
+                alert('Please enter a weight.');
+                return;
+            }
+
+            inputWeight = parseFloat(inputWeight);
+
+            let kg, lbs, g;
+
+            switch (inputUnit) {
+                case 'kg':
+                    kg = inputWeight;
+                    lbs = inputWeight * 2.20462;
+                    g = inputWeight * 1000;
+                    break;
+                case 'lbs':
+                    kg = inputWeight * 0.453592;
+                    lbs = inputWeight;
+                    g = inputWeight * 453.592;
+                    break;
+                case 'g':
+                    kg = inputWeight / 1000;
+                    lbs = inputWeight * 0.00220462;
+                    g = inputWeight;
+                    break;
+            }
+
+            document.getElementById('outputKg').textContent = kg.toFixed(2) + ' Kilograms';
+            document.getElementById('outputLbs').textContent = lbs.toFixed(2) + ' Pounds';
+            document.getElementById('outputG').textContent = g.toFixed(2) + ' Grams';
+        }
+
+    </script>
+</body>
+
+</html>
